@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KK 園區 4.0 先發戰鬥卡牌</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #161616;
+    --surface: #111214;
+    --surface-2: #1c1e23;
+    --text: #f3f4f6;
+    --muted: #9ca3af;
+    --accent: #dc2626;
+    --accent-strong: #ef4444;
+    --border: #4a1515;
+    --media: linear-gradient(135deg, #b91c1c 0%, #450a0a 100%);
+    --num-color: #ffffff;
+    --chip-bg: #7f1d1d;
+    --chip-text: #ffffff;
+    --seg-off: #353941;
+    --organ: #22c55e;
+    --shadow: rgba(220, 38, 38, 0.35);
+    --warn: #facc15;
+  }
+
+  :root[data-theme="light"] {
+    --bg: #f5f5f2;
+    --surface: #ffffff;
+    --surface-2: #f1f1ed;
+    --text: #1a1a1a;
+    --muted: #6b6b6b;
+    --accent: #c81e1e;
+    --accent-strong: #c81e1e;
+    --border: #e2e2dc;
+    --media: linear-gradient(180deg, #f3f3ef 0%, #e4e4de 100%);
+    --num-color: #c81e1e;
+    --chip-bg: #1a1a1a;
+    --chip-text: #ffffff;
+    --seg-off: #e4e4de;
+    --organ: #15803d;
+    --shadow: rgba(0, 0, 0, 0.08);
+    --warn: #b45309;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans TC', system-ui, -apple-system, sans-serif;
+    padding: 32px 16px 48px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .wrap { max-width: 1280px; margin: 0 auto; }
+
+  /* Header */
+  .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--accent);
+  }
+  .eyebrow { margin: 0 0 6px; font-size: 13px; font-weight: 700; letter-spacing: 0.18em; color: var(--muted); }
+  h1 { margin: 0; font-size: clamp(28px, 5vw, 52px); font-weight: 900; letter-spacing: 0.02em; color: var(--accent); line-height: 1.1; }
+  h1 span { color: var(--text); font-size: 0.55em; letter-spacing: 0.04em; margin-left: 6px; }
+  .sub { margin: 10px 0 0; color: var(--muted); font-size: 15px; }
+
+  .theme-toggle {
+    appearance: none;
+    border: 1.5px solid var(--text);
+    background: transparent;
+    color: var(--text);
+    font: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 9px 18px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+  }
+  .theme-toggle:hover { background: var(--text); color: var(--bg); }
+  .theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  /* Summary */
+  .summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+  .stat {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .stat .k { font-size: 12px; color: var(--muted); font-weight: 700; letter-spacing: 0.04em; }
+  .stat .v { font-size: 26px; font-weight: 900; margin-top: 4px; }
+  .stat .v small { font-size: 13px; color: var(--muted); font-weight: 700; margin-left: 2px; }
+  .stat .names { font-size: 12px; color: var(--muted); margin-top: 4px; line-height: 1.5; }
+
+  /* Grid */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px var(--shadow); }
+
+  .card-media {
+    position: relative;
+    height: 230px;
+    background: var(--media);
+    overflow: hidden;
+  }
+  .card-media .initial {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 72px; font-weight: 900; color: rgba(255,255,255,0.18);
+  }
+  :root[data-theme="light"] .card-media .initial { color: rgba(0,0,0,0.12); }
+  .card-media img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center 20%;
+  }
+  .num {
+    position: absolute; top: 10px; left: 14px; z-index: 2;
+    font-size: 36px; font-weight: 900; font-style: italic;
+    color: var(--num-color);
+    text-shadow: 0 2px 8px rgba(0,0,0,0.35);
+  }
+  :root[data-theme="light"] .num { text-shadow: none; }
+
+  .card-body { padding: 18px 18px 20px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+
+  .card h3 {
+    margin: 0;
+    font-size: 20px; font-weight: 900; color: var(--accent-strong);
+    padding-bottom: 8px; border-bottom: 1px solid var(--border);
+  }
+
+  .trait { margin: 0; font-size: 13px; line-height: 1.7; color: var(--muted); }
+  .type-row { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); }
+  .chip {
+    background: var(--chip-bg); color: var(--chip-text);
+    font-size: 12px; font-weight: 700; padding: 2px 8px; border-radius: 4px;
+  }
+  .type-row b { color: var(--text); font-weight: 700; }
+
+  /* Metrics: 體能 / 內臟健康度 */
+  .metrics {
+    display: grid; gap: 8px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+  }
+  .metric { display: grid; grid-template-columns: 78px 1fr auto; align-items: center; gap: 8px; font-size: 13px; }
+  .mlabel { color: var(--muted); font-weight: 700; white-space: nowrap; }
+  .mval { font-weight: 900; font-variant-numeric: tabular-nums; min-width: 30px; text-align: right; }
+  .segs { display: inline-flex; gap: 3px; }
+  .segs i {
+    display: block; width: 100%; max-width: 22px; height: 8px; border-radius: 2px;
+    background: var(--seg-off);
+  }
+  .segs i.on { background: var(--accent); }
+  .segs.organ i.on { background: var(--organ); }
+
+  .power { margin: 0; font-size: 13px; font-weight: 700; color: var(--text); }
+
+  dl { margin: 0; display: grid; gap: 6px; font-size: 13px; }
+  dl div { display: grid; grid-template-columns: 74px 1fr; gap: 8px; }
+  dt { color: var(--muted); font-weight: 700; }
+  dd { margin: 0; line-height: 1.5; }
+  .stats { background: var(--surface-2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+  .stats dd.star { color: var(--warn); font-weight: 700; }
+  .ocs { border-top: 1px dashed var(--border); padding-top: 12px; }
+  .ocs dt { color: var(--accent-strong); }
+  .ocs div:nth-child(2) dt { color: #a855f7; }
+  .ocs div:nth-child(3) dt { color: var(--muted); }
+
+  .note {
+    margin: 28px 0 0;
+    font-size: 12px; color: var(--muted); line-height: 1.7;
+    border-left: 3px solid var(--warn); padding-left: 12px;
+  }
+
+  @media (max-width: 480px) {
+    body { padding: 20px 16px 32px; }
+    .grid { grid-template-columns: 1fr; }
+    .metric { grid-template-columns: 70px 1fr 30px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div>
+      <p class="eyebrow">KK PARK 4.0 · 2026 秋季</p>
+      <h1>KK園區 <span>官方先發戰鬥卡牌</span></h1>
+      <p class="sub">內臟器官健康才是努力的目標・成績干我什麼事</p>
+    </div>
+    <button id="theme-toggle" class="theme-toggle" type="button">白底版</button>
+  </header>
+
+  <section class="summary" id="summary" aria-label="團隊統計"></section>
+
+  <main class="grid" id="cards"></main>
+
+  <p class="note">
+    體能＝戰鬥力「終值」星數換算（1–5），為暫定換算。<br>
+    內臟健康度為暫定評分（1–5，5 ＝最新鮮），部分成員依 2026 秋季報告內容推估，其餘預設 3，待確認後定稿。<br>
+    照片路徑：kk-assets/（由 人員/ 資料夾縮圖產生）；無照片者顯示首字。
+  </p>
+</div>
+
+<script>
+  const PHOTO_DIR = 'kk-assets/';
+
+  // organ: 內臟健康度（暫定，1–5）；photo: 縮圖檔名（空字串 = 無照片）
+  const members = [
+    { id: "00", name: "Kenty (文書/魔王)", type: "情報販子", power: "226x2/三塔/攝影狙擊", combat: "⭐⭐ ➔ ⭐⭐", scam: "⭐⭐", style: "帶刀逃生、機關暗器", tactic: "真假混雜、利益誘導", flaw: "缺乏真正的盟友，容易被圍剿", trait: "舉相機的時候最溫和，相機一放下就是園區的攝影狙擊手。", organ: 3, photo: "00.jpg" },
+    { id: "01", name: "阿彬 (無情首腦)", type: "強大卻卑鄙", power: "路線獨裁/畫變態等高線", combat: "⭐⭐⭐⭐⭐", scam: "⭐⭐⭐⭐⭐", style: "正面碾壓 + 骯髒手段", tactic: "戰術欺騙、心理垃圾話", flaw: "自大、喜歡玩弄對手導致翻車", trait: "路線畫得比地圖還細，唯一怕的是等高線會來跟他抗議。", organ: 3, photo: "01.jpg" },
+    { id: "02", name: "小雅 (決策首腦)", type: "扮豬吃老虎", power: "掌握生殺大權", combat: "⭐⭐ ➔ ⭐⭐⭐⭐", scam: "⭐⭐⭐⭐", style: "隱藏實力、一擊必殺", tactic: "偽裝弱者、博取同情", flaw: "容易因過度謹慎而錯失良機", trait: "說話輕聲細語，但她的決策能讓人腿軟三天。", organ: 3, photo: "02.jpg" },
+    { id: "03", name: "Zoe (冷血秘書長)", type: "扮豬吃老虎", power: "113x8/雪山輕鬆爬", combat: "⭐⭐ ➔ ⭐⭐⭐⭐⭐", scam: "⭐⭐⭐⭐⭐", style: "隱藏實力、一擊必殺", tactic: "精算剩餘價值、誘敵深入", flaw: "容易因過度謹慎而錯失良機", trait: "計算機不離手，連補給站的熱湯都要先算成本。", organ: 3, photo: "03.jpg" },
+    { id: "04", name: "Mei (詐騙夫妻)", type: "扮豬吃老虎", power: "226x2/泳渡基隆嶼", combat: "⭐ ➔ ⭐⭐⭐⭐⭐", scam: "⭐⭐⭐⭐⭐", style: "隱藏實力、一擊必殺", tactic: "偽裝弱者 (今天輕鬆騎)", flaw: "一旦謊言被當場拆穿就完蛋", trait: "笑容超甜，講「今天輕鬆騎」時，周圍的人會默默開始祈禱。", organ: 3, photo: "04.jpg" },
+    { id: "05", name: "腥大叔 (詐騙夫妻)", type: "強大卻卑鄙", power: "226x2/泳渡基隆嶼", combat: "⭐⭐⭐⭐⭐", scam: "⭐⭐⭐⭐⭐", style: "正面碾壓 + 屠夫模式", tactic: "戰術欺騙、上卡不等人", flaw: "自大、喜歡玩弄對手導致翻車", trait: "平常是溫柔大哥，過了某個坡度會換一張臉。", organ: 3, photo: "05.jpg" },
+    { id: "06", name: "Jerry 千里馬", type: "強大卻卑鄙", power: "360x2/跨國境兵器", combat: "⭐⭐⭐⭐⭐", scam: "⭐⭐⭐⭐⭐", style: "正面碾壓 + 骯髒手段", tactic: "無氧恐慌、物理毀滅", flaw: "自大、喜歡玩弄對手導致翻車", trait: "跨國境的物理兵器，據說騎到一半會自己充電。", organ: 5, photo: "06.jpg" },
+    { id: "07", name: "Daniel Yang", type: "強大卻卑鄙", power: "180x3/折磨基因傳承", combat: "⭐⭐⭐⭐", scam: "⭐⭐", style: "正面碾壓 + 骯髒手段", tactic: "戰術欺騙、心理垃圾話", flaw: "自大、喜歡玩弄對手導致翻車", trait: "父親的基因複製品，連喘氣的節奏都一模一樣。", organ: 3, photo: "07.jpg" },
+    { id: "08", name: "彭馨慧 (千里馬妻)", type: "情報販子", power: "居家守候/後勤保障", combat: "⭐⭐", scam: "⭐⭐⭐⭐", style: "帶刀逃生、機關暗器", tactic: "真假混雜、利益誘導", flaw: "缺乏真正的盟友，容易被圍剿", trait: "家裡的後勤指揮官，每次出發都準備三份補給表。", organ: 3, photo: "" },
+    { id: "09", name: "順子 (絞肉鐵衛)", type: "強大卻卑鄙", power: "226x2/中雙塔/四極點", combat: "⭐⭐⭐⭐⭐", scam: "⭐⭐⭐⭐⭐", style: "正面碾壓 + 骯髒手段", tactic: "無縫輪車、暴力施壓", flaw: "自大、喜歡玩弄對手導致翻車", trait: "絞肉鐵衛，「鐵衛」這個稱號是他自己取的。", organ: 3, photo: "09.jpg" },
+    { id: "10", name: "Sam (絞肉鐵衛)", type: "情報販子", power: "226x10/中雙塔/D槽異動", combat: "⭐⭐⭐⭐⭐", scam: "⭐⭐⭐", style: "帶刀逃生、機關暗器", tactic: "真假混雜、利益誘導", flaw: "缺乏真正的盟友，容易被圍剿", trait: "D槽異動的神秘人物，隨身帶著自製電解質飲料到處傳教。", organ: 2, photo: "10.jpg" },
+    { id: "11", name: "Max (絞肉鐵衛)", type: "強大卻卑鄙", power: "後方壓陣/嚴防跳車", combat: "⭐⭐⭐⭐⭐", scam: "⭐⭐", style: "正面碾壓 + 骯髒手段", tactic: "戰術欺騙、心理垃圾話", flaw: "自大、喜歡玩弄對手導致翻車", trait: "壓陣專員，大家都說他是最溫柔的壓力。", organ: 3, photo: "11.jpg" },
+    { id: "12", name: "大旺 (絞肉父子)", type: "強大卻卑鄙", power: "雪巴/武嶺/神掌/42k", combat: "⭐⭐⭐⭐", scam: "⭐⭐⭐", style: "正面碾壓 + 骯髒手段", tactic: "發動無意義衝刺", flaw: "自大、喜歡玩弄對手導致翻車", trait: "父子檔的爸爸，最愛說「再一坡就到了」，每次都騙人。", organ: 2, photo: "12.jpg" },
+    { id: "13", name: "小旺 (絞肉父子)", type: "強大卻卑鄙", power: "雪巴/武嶺/神掌/42k", combat: "⭐⭐⭐⭐", scam: "⭐⭐", style: "正面碾壓 + 骯髒手段", tactic: "戰術欺騙、心理垃圾話", flaw: "自大、喜歡玩弄對手導致翻車", trait: "父子檔的兒子，嘴巴很硬，腿比爸爸還誠實。", organ: 2, photo: "13.jpg" },
+    { id: "14", name: "David 正哥", type: "扮豬吃老虎", power: "113x2/Hash Virus/武嶺", combat: "⭐⭐ ➔ ⭐⭐⭐⭐⭐", scam: "⭐⭐⭐⭐", style: "隱藏實力、一擊必殺", tactic: "偽裝弱者、博取同情", flaw: "容易因過度謹慎而錯失良機", trait: "Hash Virus 會長，據說他的補給包永遠多放一根香蕉。", organ: 3, photo: "14.jpg" },
+    { id: "15", name: "阿俊 (正哥子)", type: "扮豬吃老虎", power: "113x2/雪山後花園", combat: "⭐⭐ ➔ ⭐⭐⭐⭐⭐", scam: "⭐⭐⭐", style: "隱藏實力、一擊必殺", tactic: "偽裝弱者、博取同情", flaw: "容易因過度謹慎而錯失良機", trait: "大二的正哥子，年輕人的體力是老爸的參考答案。", organ: 3, photo: "15.jpg" },
+    { id: "16", name: "Ryan 江政豪", type: "強大卻卑鄙", power: "雙塔/如來神掌/海外傭兵", combat: "⭐⭐⭐⭐", scam: "⭐⭐", style: "正面碾壓 + 骯髒手段", tactic: "戰術欺騙、心理垃圾話", flaw: "自大、喜歡玩弄對手導致翻車", trait: "長距離拉扯專員，最大的興趣是問你要不要再一圈。", organ: 3, photo: "16.jpg" },
+    { id: "17", name: "Ady 吳佩娟", type: "空白牌騙子", power: "國際化痛苦指標", combat: "⭐⭐", scam: "⭐⭐⭐⭐", style: "毫無戰力、全靠氣場", tactic: "虛張聲勢、偽造神蹟", flaw: "一旦謊言被當場拆穿就完蛋", trait: "海外傭兵，帶來最新國際痛苦指標，據說會用英文喊加油。", organ: 3, photo: "" },
+    { id: "18", name: "莎拉 (226外掛)", type: "扮豬吃老虎", power: "226 超外掛車手", combat: "⭐ ➔ ⭐⭐⭐⭐⭐", scam: "⭐⭐⭐⭐⭐", style: "隱藏實力、一擊必殺", tactic: "偽裝弱者 (假裝墊底)", flaw: "容易因過度謹慎而錯失良機", trait: "226 超外掛，別人在喘氣，她在看風景。", organ: 4, photo: "18.jpg" },
+    { id: "19", name: "水母 (A級豬仔)", type: "扮豬吃老虎", power: "113x4/雙塔/泳渡基隆嶼", combat: "⭐⭐ ➔ ⭐⭐⭐⭐⭐", scam: "⭐⭐", style: "隱藏實力、一擊必殺", tactic: "偽裝弱者、博取同情", flaw: "容易因過度謹慎而錯失良機", trait: "鐵肺豬仔，平地像魚，上坡就變成水母飄起來。", organ: 4, photo: "19.jpg" },
+    { id: "20", name: "雅菁 (A級豬仔)", type: "空白牌騙子", power: "113x2/21k x3/環島", combat: "⭐⭐⭐", scam: "⭐⭐", style: "毫無戰力、全靠氣場", tactic: "虛張聲勢 (裝死)", flaw: "一旦謊言被當場拆穿就完蛋", trait: "耐力怪獸，裝死的功力一流，醒來還能再騎一輪。", organ: 4, photo: "20.jpg" },
+    { id: "21", name: "小宛 (連坐夫妻)", type: "空白牌騙子", power: "買一送一/痛苦擔當", combat: "⭐⭐", scam: "⭐⭐⭐⭐", style: "毫無戰力、全靠氣場", tactic: "虛張聲勢、崩潰表情", flaw: "一旦謊言被當場拆穿就完蛋", trait: "買一送一的痛苦擔當，崩潰表情拿過三次金獎。", organ: 2, photo: "21.jpg" },
+    { id: "22", name: "碗公 (連坐夫妻)", type: "空白牌騙子", power: "買一送一/勞力擔當", combat: "⭐⭐⭐⭐⭐", scam: "⭐⭐⭐⭐⭐", style: "毫無戰力、全靠氣場", tactic: "虛張聲勢、偽造神蹟", flaw: "一旦謊言被當場拆穿就完蛋", trait: "練武奇才，據說在山頂打過一套太極，連風都讓他三分。", organ: 2, photo: "22.jpg" },
+    { id: "23", name: "Rick", type: "空白牌騙子", power: "北高14h", combat: "⭐⭐⭐", scam: "⭐⭐", style: "毫無戰力、全靠氣場", tactic: "虛張聲勢、偽造神蹟", flaw: "一旦謊言被當場拆穿就完蛋", trait: "碗公的朋友，北高 14 小時後仍能笑著說「還好」。", organ: 3, photo: "" }
+  ];
+
+  // ---------- helpers ----------
+  const countStars = s => (s.match(/⭐/g) || []).length;
+  const lastStage  = s => s.split('➔').pop().trim();
+  // 體能 = 戰鬥力終值（暫定換算）
+  const fitnessOf  = m => countStars(lastStage(m.combat));
+  const segs = (n, cls = '') =>
+    `<span class="segs ${cls}">` + Array.from({ length: 5 }, (_, i) => `<i class="${i < n ? 'on' : ''}"></i>`).join('') + `</span>`;
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+
+  // ---------- summary ----------
+  const avg = arr => arr.reduce((a, b) => a + b, 0) / arr.length;
+  const fitAvg = avg(members.map(fitnessOf)).toFixed(1);
+  const organAvg = avg(members.map(m => m.organ)).toFixed(1);
+  const lowOrgan = members.filter(m => m.organ <= 2);
+  const withPhoto = members.filter(m => m.photo).length;
+
+  document.getElementById('summary').innerHTML = `
+    <div class="stat"><div class="k">先發人數</div><div class="v">${members.length}<small>人</small></div></div>
+    <div class="stat"><div class="k">平均體能</div><div class="v">${fitAvg}<small>/ 5</small></div></div>
+    <div class="stat"><div class="k">平均內臟健康度</div><div class="v">${organAvg}<small>/ 5</small></div></div>
+    <div class="stat"><div class="k">內臟 ≤ 2 重點觀察</div><div class="v">${lowOrgan.length}<small>人</small></div>
+      <div class="names">${lowOrgan.map(m => esc(m.name.split(' ')[0])).join('、')}</div></div>
+    <div class="stat"><div class="k">已配對照片</div><div class="v">${withPhoto}<small>/ ${members.length}</small></div></div>
+  `;
+
+  // ---------- cards ----------
+  document.getElementById('cards').innerHTML = members.map(m => {
+    const fit = fitnessOf(m);
+    const photo = m.photo ? `<img src="${PHOTO_DIR}${esc(m.photo)}" alt="${esc(m.name)}" loading="lazy" onerror="this.remove()">` : '';
+    return `
+    <article class="card">
+      <div class="card-media">
+        <span class="initial" aria-hidden="true">${esc(m.name.charAt(0))}</span>
+        ${photo}
+        <span class="num">#${m.id}</span>
+      </div>
+      <div class="card-body">
+        <h3>${esc(m.name)}</h3>
+        <p class="trait">「${esc(m.trait)}」</p>
+        <div class="type-row"><span class="chip">類型</span><b>${esc(m.type)}</b></div>
+
+        <div class="metrics">
+          <div class="metric"><span class="mlabel">人員體能</span>${segs(fit)}<span class="mval">${fit}/5</span></div>
+          <div class="metric"><span class="mlabel">內臟健康度</span>${segs(m.organ, 'organ')}<span class="mval">${m.organ}/5</span></div>
+        </div>
+
+        <p class="power">⚡ 體能預估：${esc(m.power)}</p>
+
+        <dl class="stats">
+          <div><dt>詐騙能力</dt><dd class="star">${m.scam}</dd></div>
+          <div><dt>戰鬥力</dt><dd class="star">${m.combat}</dd></div>
+        </dl>
+
+        <dl class="ocs">
+          <div><dt>風格</dt><dd>${esc(m.style)}</dd></div>
+          <div><dt>手法</dt><dd>${esc(m.tactic)}</dd></div>
+          <div><dt>致命傷</dt><dd>${esc(m.flaw)}</dd></div>
+        </dl>
+      </div>
+    </article>`;
+  }).join('');
+
+  // ---------- theme toggle ----------
+  const root = document.documentElement;
+  const btn = document.getElementById('theme-toggle');
+  function applyTheme(t) {
+    root.setAttribute('data-theme', t);
+    btn.textContent = t === 'light' ? '深色版' : '白底版';
+  }
+  let saved = null;
+  try { saved = localStorage.getItem('kk-theme'); } catch (e) {}
+  applyTheme(saved === 'light' ? 'light' : 'dark');
+  btn.addEventListener('click', () => {
+    const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    applyTheme(next);
+    try { localStorage.setItem('kk-theme', next); } catch (e) {}
+  });
+</script>
+</body>
+</html>
