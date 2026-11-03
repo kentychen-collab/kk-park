@@ -1,0 +1,213 @@
+<!doctype html><html lang="zh-Hant" data-theme="light"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>11/23 KK園區玉山行｜行程與人員</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Barlow+Condensed:wght@600;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1B2340;--red:#D7262E;--road:#9AA3B5;--paper:#FFFFFF;--soft:#F3F5F9;--line:#DDE2EB;--warn:#FFF3D6;--warnink:#7A4B00;--carc:#6B7694}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ink:#E8ECF5;--paper:#121726;--soft:#1B2236;--line:#2C3550;--road:#5A6683;--warn:#3A2E12;--warnink:#FFD78A;--carc:#8A95B3}}
+:root[data-theme="dark"]{--ink:#E8ECF5;--paper:#121726;--soft:#1B2236;--line:#2C3550;--road:#5A6683;--warn:#3A2E12;--warnink:#FFD78A;--carc:#8A95B3}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Noto Sans TC",system-ui,sans-serif;line-height:1.65;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.wrap{max-width:960px;margin:0 auto;padding:28px 20px 64px}
+header{display:grid;grid-template-columns:1.1fr 1fr;gap:24px;align-items:center;border-bottom:6px solid var(--red);padding-bottom:24px}
+header .date{font-family:"Barlow Condensed",sans-serif;font-weight:800;font-size:clamp(64px,13vw,128px);line-height:.85;color:var(--red);margin:0}
+header h1{font-size:clamp(26px,4.4vw,40px);font-weight:900;line-height:1.2;margin:14px 0 8px}
+header p{margin:0;font-size:15px;opacity:.8}
+.facts{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:16px}
+.facts div{font-size:13px}.facts b{display:block;font-family:"Barlow Condensed",sans-serif;font-size:30px;line-height:1}
+.map{background:var(--soft);border-radius:4px;padding:8px}
+.map svg{width:100%;height:auto;display:block}
+.road{fill:none;stroke:var(--red);stroke-width:4;stroke-linejoin:round;stroke-linecap:round}
+.road2{fill:none;stroke:var(--ink);stroke-width:4;stroke-linejoin:round;stroke-linecap:round;stroke-dasharray:1 0}
+.road-shadow{fill:none;stroke:var(--road);stroke-width:12;stroke-linejoin:round;stroke-linecap:round;opacity:.35}
+.pt{fill:var(--paper);stroke:var(--ink);stroke-width:2}.pt.big{fill:var(--red);stroke:var(--paper);stroke-width:3}.pt.ink{fill:var(--ink);stroke:var(--paper);stroke-width:3}
+.lbl{font-size:12px;fill:var(--ink)}.lbl.big{font-size:14px;font-weight:900}.km{fill:var(--red);font-weight:700;font-size:11px}
+.cap{font-size:12px;opacity:.7;margin:6px 4px 0}
+section{margin-top:44px}
+h2{font-size:22px;font-weight:900;margin:0 0 14px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+h2 small{font-size:13px;font-weight:500;opacity:.65}
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2px;background:var(--line);border:2px solid var(--line)}
+.rules div{background:var(--paper);padding:14px 16px}.rules b{display:block;font-size:16px}.rules span{font-size:13px;opacity:.8}
+.rules .hot b{color:var(--red)}
+#brief .rules div:nth-child(4){grid-column:1/-1}
+.tbl{overflow-x:auto}table{border-collapse:collapse;width:100%;min-width:720px;font-size:14px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;font-weight:700;opacity:.7;border-bottom:2px solid var(--ink)}
+td.n{font-family:"Barlow Condensed",sans-serif;font-size:20px;font-weight:800;color:var(--red);white-space:nowrap}
+tfoot td{font-weight:700;border-top:2px solid var(--ink);border-bottom:0}
+.flag{display:inline-block;background:var(--warn);color:var(--warnink);font-size:12px;padding:1px 8px;border-radius:3px;margin-top:4px}
+.note{background:var(--warn);color:var(--warnink);padding:12px 16px;font-size:14px;margin-top:12px;border-left:4px solid #E0A100}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.stop{display:flex;flex-direction:column;gap:2px;padding:16px;border:2px solid var(--line);color:var(--ink);background:var(--paper)}
+.stop .car{font-size:12px;font-weight:700;align-self:flex-start;padding:0 7px;border-radius:3px;color:#fff}
+.carA{background:var(--ink);color:var(--paper)!important}.carB{background:var(--red)}.carC{background:var(--carc)}
+.stop .time{font-family:"Barlow Condensed",sans-serif;font-size:40px;font-weight:800;line-height:1;margin-top:6px}
+.stop .time small{font-size:18px}
+.stop strong{font-size:16px}.stop .addr{font-size:13px;opacity:.8}
+.gate{display:flex;gap:20px;align-items:center;border:2px solid var(--red);padding:16px 20px;border-radius:4px}
+.gate .gt{font-family:"Barlow Condensed",sans-serif;font-weight:800;font-size:clamp(56px,12vw,96px);line-height:.9;color:var(--red)}
+.gate b{font-size:18px;display:block}.gate span{font-size:14px;opacity:.85}
+@media(max-width:640px){.gate{flex-direction:column;align-items:flex-start;gap:8px}}
+.tl{list-style:none;padding:0;margin:0;border-left:3px solid var(--red)}
+.tl li{padding:0 0 14px 18px;position:relative}.tl li::before{content:"";position:absolute;left:-8px;top:8px;width:13px;height:13px;border-radius:50%;background:var(--paper);border:3px solid var(--red)}
+.tl b{font-size:16px;margin-right:8px}
+.routes{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));border:2px solid var(--ink)}
+.routes h3{margin:0;padding:10px 14px;font-size:15px;background:var(--ink);color:var(--paper);text-align:center}
+.routes .col+.col{border-left:2px solid var(--ink)}
+.routes .body{padding:16px 14px 2px 20px}
+.routes .tail{padding:10px 14px;border-top:1px solid var(--line);font-size:13px}
+.routes .tail b{color:var(--red)}
+@media(max-width:640px){.routes .col+.col{border-left:0;border-top:2px solid var(--ink)}}
+.k{font-style:normal;font-size:11px;font-weight:700;padding:0 6px;border-radius:3px;margin-left:6px;vertical-align:2px;white-space:nowrap}
+.k.fix{background:var(--red);color:#fff}.k.est{background:var(--soft);border:1px solid var(--line)}.k.tbd{background:var(--warn);color:var(--warnink)}
+.times .tl b{font-family:"Barlow Condensed",sans-serif;font-size:22px;color:var(--red)}
+.dep{display:block;color:var(--red);font-family:"Barlow Condensed",sans-serif;font-weight:800;font-size:24px;line-height:1.2;margin:6px 0 2px}
+td.dep{display:table-cell;font-size:20px;white-space:nowrap}
+.times .tl li{padding-bottom:12px}.times .tl small{display:block;font-size:12px;opacity:.75}
+.quote{border-left:6px solid var(--red);background:var(--soft);padding:18px 22px;font-size:17px;font-weight:700;line-height:1.7}
+.quote small{display:block;font-size:13px;font-weight:500;opacity:.7;margin-bottom:6px}
+.pg{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
+.pc{border:2px solid var(--line);background:var(--paper);display:flex;flex-direction:column}
+.pc.drv{border-color:var(--ink)}
+.pc .ph{position:relative;aspect-ratio:4/5;background:var(--soft);overflow:hidden}
+.pc .ph img{width:100%;height:100%;object-fit:cover;display:block}
+.pc .ph .no{position:absolute;top:8px;left:8px;background:var(--ink);color:var(--paper);font-family:"Barlow Condensed",sans-serif;font-weight:800;font-size:20px;line-height:1.3;padding:0 8px;border-radius:3px}
+.pc .ph .empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;font-size:72px;font-weight:900;color:var(--road);line-height:1}
+.pc .ph .empty small{font-size:12px;font-weight:500;margin-top:8px}
+.pc .bd{padding:12px 14px 14px;display:flex;flex-direction:column;gap:4px;flex:1}
+.pc strong{font-size:20px;line-height:1.2}
+.pc .role{font-size:13px;opacity:.85}
+.pc .meta{margin-top:auto;padding-top:8px;font-size:12px;display:flex;flex-wrap:wrap;gap:4px 6px;align-items:center}
+.pc .meta .car{font-weight:700;padding:0 7px;border-radius:3px;color:#fff}
+.sum{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:2px;background:var(--line);border:2px solid var(--line);margin-bottom:16px}
+.sum div{background:var(--paper);padding:12px 16px;font-size:13px}.sum b{display:block;font-family:"Barlow Condensed",sans-serif;font-size:34px;line-height:1.05}
+.fine{font-size:13px;opacity:.75}
+@media(max-width:720px){header{grid-template-columns:1fr}}
+.theme-toggle{position:fixed;top:calc(12px + env(safe-area-inset-top,0px));right:12px;z-index:10;font:700 13px 'Noto Sans TC',sans-serif;padding:8px 14px;border-radius:20px;border:2px solid var(--ink);background:var(--paper);color:var(--ink);cursor:pointer}
+.theme-toggle:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+@media print{.theme-toggle{display:none}.pc,.stop{break-inside:avoid}header{break-after:page}body{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style></head><body><button class="theme-toggle" id="tt" type="button" aria-label="切換深淺色">切換深色</button><div class="wrap">
+
+<header><div><p class="date">11/23</p><h1>KK園區 4.0｜玉山主峰單攻</h1>
+<p>高海拔器官淨化行動｜2026 秋季員工旅遊</p>
+<div class="facts"><div><b>12</b>人 滿編</div><div><b>3</b>路 接駁</div><div><b>17:30</b>草坪頭閘門截止</div><div><b>07:00</b>次日解除封閉</div></div></div>
+<div class="map"><svg viewBox="0 0 400 400" role="img" aria-label="路線示意：1、2號車走南投台21線經草坪頭閘門，3號車走嘉義台18線，皆往塔塔加">
+<path d="M70,360 L78,270 L90,200 L115,115 L200,45" class="road-shadow"/><path d="M70,360 L78,270 L90,200 L115,115 L200,45" class="road"/>
+<path d="M330,360 L322,240 L292,150 L250,95 L200,45" class="road-shadow"/><path d="M330,360 L322,240 L292,150 L250,95 L200,45" class="road2"/>
+<circle cx="200" cy="45" r="9" class="pt big"/><text x="200" y="26" text-anchor="middle" class="lbl big">塔塔加 → 玉山登山口</text>
+<circle cx="70" cy="360" r="7" class="pt"/><text x="14" y="385" class="lbl big">1、2 號車</text><text x="14" y="352" class="lbl" dx="0">淡水・芝山 出發</text>
+<circle cx="90" cy="200" r="6" class="pt"/><text x="104" y="205" class="lbl">台21線 水里・信義</text>
+<circle cx="115" cy="115" r="7" class="pt big"/><text x="129" y="112" class="lbl big">草坪頭閘門</text><text x="129" y="128" class="km">17:30 前通過</text>
+<circle cx="330" cy="360" r="7" class="pt ink"/><text x="386" y="385" text-anchor="end" class="lbl big">3 號車</text><text x="386" y="352" text-anchor="end" class="lbl">林口 出發</text>
+<circle cx="322" cy="240" r="6" class="pt"/><text x="308" y="245" text-anchor="end" class="lbl">高鐵嘉義站</text>
+<circle cx="292" cy="150" r="6" class="pt"/><text x="278" y="155" text-anchor="end" class="lbl">嘉義 台18線</text><text x="278" y="170" text-anchor="end" class="lbl">阿里山公路・無夜間封路</text>
+</svg><p class="cap">路線示意圖，非實際比例。紅線＝南投台21線（1、2 號車）；深色線＝嘉義台18線（3 號車）。</p></div></header>
+
+<section id="brief"><h2>任務摘要 <small>Mission Briefing</small></h2><div class="rules">
+<div class="hot"><b>行動代號</b><span>2026 秋季員工旅遊 — 玉山單攻（Yushan Main Peak）</span></div>
+<div><b>執行日期</b><span>2026 年 11 月 23 日</span></div>
+<div><b>行動總人數</b><span>12 人，滿編，拒絕新增任何累贅</span></div>
+<div><b>行動宗旨</b><span>透過極度稀薄的氧氣與陡峭的等高線，檢測本園區高價值生醫資產的心肺耐受度。順便把大家的肝醣徹底清空。</span></div></div>
+<p class="note">「純淨無污染的冷空氣吸到飽！內臟器官健康才是園區努力的目標！」</p></section>
+
+<section id="gate"><h2>高危險警告 <small>台21線夜間封閉</small></h2>
+<div class="gate"><div class="gt">17:30</div><div><b>1 號車、2 號車必須在 17:30 前通過草坪頭閘門</b><span>南投端（水里／信義）台21線 110K～145K（草坪頭至塔塔加），每日 17:30 至隔日 07:00 常態封閉。遲到者就地在路邊吹冷風過夜。</span></div></div></section>
+
+<section id="cars"><h2>兵分三路特種接駁 <small>放生遊覽車</small></h2>
+<p style="margin:0 0 14px">部分人員在單攻前一日（11/22）仍有高強度賽事，為確保全員順利抵達塔塔加，本次不包遊覽車，改採三台車分路接駁。</p>
+<div class="grid">
+<div class="stop"><span class="car carA">1 號車</span><span class="time">2<small> 人</small></span><strong>買一送一連坐車</strong><span class="dep">出發 10:45｜淡水</span><span class="addr">車長：小宛（淡水）<br>碗公（淡水）<br>南投台21線上山</span></div>
+<div class="stop"><span class="car carB">2 號車</span><span class="time">4<small> 人</small></span><strong>無情絞肉家族車</strong><span class="dep">出發 10:00｜芝山</span><span class="addr">車長：千里馬（芝山）<br>阿旺、小旺、豆腐<br>南投台21線上山</span></div>
+<div class="stop"><span class="car carC">3 號車</span><span class="time">6<small> 人</small></span><strong>高階戰損與首腦護衛車</strong><span class="dep">出發 10:00｜林口</span><span class="addr">車長：Sam（林口）<br>首腦K、阿彬、阿彬哥（自行到林口）<br>順子、莎拉<br>嘉義台18線上山（6 人座滿編）</span></div></div>
+
+<h3 style="margin:28px 0 10px">接駁總表</h3>
+<div class="tbl"><table><thead><tr><th>車次</th><th>車長（出發地）</th><th>出發時間</th><th>乘客（上車地）</th><th>上車順序</th><th>上山路線</th><th>夜間管制</th></tr></thead><tbody>
+<tr><td class="n">1 號車</td><td>小宛（淡水）</td><td class="dep">10:45 淡水出發</td><td>碗公（淡水）</td><td>淡水</td><td>南投台21線</td><td>17:30 前通過草坪頭閘門</td></tr>
+<tr><td class="n">2 號車</td><td>千里馬（芝山）</td><td class="dep">10:00 芝山出發<br>10:45 南港出發</td><td>阿旺、小旺、豆腐（南港）</td><td>芝山 → 南港</td><td>南投台21線</td><td>17:30 前通過草坪頭閘門</td></tr>
+<tr><td class="n">3 號車</td><td>Sam（林口）</td><td class="dep">10:00 林口出發<br>11:30 新屋出發</td><td>首腦K、阿彬、阿彬哥（三人自行到林口）、順子（海鷗賽會場）、莎拉（嘉義高鐵站）</td><td>林口 → 海鷗賽會場 → 高鐵嘉義站</td><td>嘉義台18線</td><td>無夜間封路管制</td></tr>
+</tbody><tfoot><tr><td colspan="7">合計 12 人（2 + 4 + 6）</td></tr></tfoot></table></div></section>
+
+<section id="routes"><h2>行軍路線 <small>各車停靠順序</small></h2>
+<div class="routes">
+<div class="col"><h3>1 號車｜小宛</h3><div class="body"><ol class="tl"><li><b>淡水</b>車長小宛、碗公上車</li><li><b>國道南下</b></li><li><b>南投台21線</b>上山</li></ol></div><div class="tail"><b>死線：</b>請務必提早發車，嚴守 17:30 通過管制站。</div></div>
+<div class="col"><h3>2 號車｜千里馬</h3><div class="body"><ol class="tl"><li><b>芝山</b>車長千里馬</li><li><b>南港</b>接阿旺全家（阿旺、小旺、豆腐）</li><li><b>國道南下</b></li><li><b>南投台21線</b>上山</li></ol></div><div class="tail"><b>死線：</b>緊跟 1 號車的配速，務必一同在 17:30 前衝過草坪頭閘門。</div></div>
+<div class="col"><h3>3 號車｜Sam</h3><div class="body"><ol class="tl"><li><b>林口</b>車長 Sam；首腦K、阿彬、阿彬哥自行到林口上車</li><li><b>海鷗賽會場</b>接剛比完海鷗繞圈賽的順子</li><li><b>高鐵嘉義站</b>接比完台南安平 515、搭高鐵過來的莎拉</li><li><b>嘉義台18線</b>（阿里山公路）上塔塔加</li></ol></div><div class="tail"><b>特權：</b>趕不上南投端管制時間，強制改走台18線（無夜間封路），隨後與 1、2 號車於高山會合。</div></div></div></section>
+
+<section id="times" class="times"><h2>11/22（日）各車時間表 <small>三台車都在 11/22 上山過夜</small></h2>
+<div class="rules">
+<div class="hot"><b>06:00 海鷗賽起跑</b><span>桃園新屋<i class="k fix">固定</i></span></div>
+<div class="hot"><b>11:00 最晚完賽</b><span>限時 5 小時（06:00 + 5:00）<i class="k fix">固定</i></span></div>
+<div class="hot"><b>11:30 3 號車離開新屋</b><span>完賽後預留 30 分鐘<i class="k fix">固定</i></span></div>
+<div class="hot"><b>17:30 草坪頭閘門</b><span>1、2 號車死線<i class="k fix">固定</i></span></div>
+<div><b>莎拉到嘉義站</b><span>高鐵時間未定<i class="k tbd">待確認</i></span></div></div>
+<p class="note">標「估算」的車程是一般路況推估，不是即時導航。出發前請用 Google 地圖「指定出發時間」逐段驗證，並把實際結果回報，我再修正。</p>
+<div class="routes" style="margin-top:16px">
+<div class="col"><h3>1 號車｜小宛、碗公</h3><div class="body"><ol class="tl">
+<li><b>10:45</b>淡水出發，國道南下<i class="k est">估算</i></li>
+<li><b>14:30</b>抵達水里，補給午餐<i class="k est">估算</i><small>車程約 3 小時 45 分（含短休）</small></li>
+<li><b>15:10</b>離開水里，走台21線<i class="k est">估算</i></li>
+<li><b>16:40</b>抵達草坪頭閘門<i class="k est">估算</i><small>距 17:30 緩衝 50 分鐘</small></li>
+<li><b>17:30</b>閘門死線<i class="k fix">固定</i></li>
+<li><b>約 17:45</b>抵達塔塔加<i class="k est">估算</i></li></ol></div><div class="tail"><b>緩衝只有 50 分鐘：</b>任何一段延誤超過這個數字就過不了閘門。</div></div>
+<div class="col"><h3>2 號車｜千里馬、阿旺、小旺、豆腐</h3><div class="body"><ol class="tl">
+<li><b>10:00</b>芝山出發<i class="k est">估算</i></li>
+<li><b>10:30</b>南港接阿旺一家三口<i class="k est">估算</i></li>
+<li><b>10:45</b>南港出發，國道南下<i class="k est">估算</i></li>
+<li><b>14:30</b>抵達水里，與 1 號車會合<i class="k est">估算</i></li>
+<li><b>15:10</b>兩車一起離開水里<i class="k est">估算</i></li>
+<li><b>16:40</b>抵達草坪頭閘門<i class="k est">估算</i></li>
+<li><b>17:30</b>閘門死線<i class="k fix">固定</i></li></ol></div><div class="tail"><b>配速：</b>緊跟 1 號車，兩車同時過閘門。</div></div>
+<div class="col"><h3>3 號車｜Sam＋5 人</h3><div class="body"><ol class="tl">
+<li><b>09:45</b>林口集合：Sam、首腦K、阿彬、阿彬哥<i class="k est">估算</i></li>
+<li><b>10:00</b>林口出發往新屋<i class="k est">估算</i></li>
+<li><b>10:50</b>抵達新屋賽事會場<i class="k est">估算</i><small>比 11:00 最晚完賽早 10 分鐘到</small></li>
+<li><b>11:30</b>接順子，離開新屋<i class="k fix">固定</i></li>
+<li><b>約 14:30</b>抵達高鐵嘉義站<i class="k est">估算</i><small>車程約 3 小時（含短休）</small></li>
+<li><b>待確認</b>莎拉出站上車<i class="k tbd">待確認</i></li>
+<li><b>嘉義站 + 約 3 小時</b>走台18線抵達塔塔加<i class="k est">估算</i></li></ol></div><div class="tail"><b>莎拉的時間決定終點時間：</b>14:30 前到站就不用等，每晚 1 分鐘，抵達塔塔加就晚 1 分鐘。台18線全程是山路，若 15:00 後才出發，會在天黑後上山。</div></div></div></section>
+
+<section id="notes"><h2>必看提醒</h2><div class="rules">
+<div class="hot"><b>17:30 草坪頭閘門</b><span>1、2 號車唯一死線，遲到就地過夜</span></div>
+<div class="hot"><b>3 號車走台18線</b><span>不走南投端，路線不可擅自更改</span></div>
+<div><b>全員在高山會合</b><span>三車抵達塔塔加後會合</span></div>
+<div><b>車長鎖好車門</b><span>上車就沒有回頭路</span></div>
+<div><b>滿編 12 人</b><span>不接受新增人員</span></div>
+<div><b>11/22 賽事</b><span>順子（海鷗繞圈賽）、莎拉（台南安平 515）前一日賽事，3 號車負責接駁</span></div></div></section>
+
+<section id="word"><h2>出發前訓示</h2><div class="quote"><small>首腦 K</small>「順子跟莎拉完美示範了什麼叫『不留一絲肝醣給明天』！請各車長鎖好車門，上車就沒有回頭路，我們玉山排雲山莊見！祝各位雙腿抽筋，內臟發光！」</div></section>
+
+<section id="people"><h2>人員介紹 <small>最終抽籤與受刑名單｜12 人</small></h2>
+<div class="sum"><div><b>12</b>總人數</div><div><b>3</b>車長</div><div><b>9</b>乘客</div><div><b>3</b>台車</div></div>
+<div class="pg">
+
+<div class="pc"><div class="ph"><span class="no">01</span><img src="web_photos/p_kenty.jpg" alt="首腦K" loading="lazy"></div><div class="bd"><strong>首腦K</strong><span class="role">隱藏魔王／文書攝影組。負責紀錄大家高山症發作的瞬間。</span><div class="meta"><span class="car carC">3 號車</span>自行到林口上車</div></div></div>
+
+<div class="pc drv"><div class="ph"><span class="no">02</span><img src="web_photos/p_xiaowan.jpg" alt="小宛" loading="lazy"></div><div class="bd"><strong>小宛</strong><span class="role">買一送一優質肉票。</span><div class="meta"><span class="car carA">1 號車</span>車長｜淡水</div></div></div>
+
+<div class="pc"><div class="ph"><span class="no">03</span><img src="web_photos/p_wangong.jpg" alt="碗公" loading="lazy"></div><div class="bd"><strong>碗公</strong><span class="role">連坐法受害者。</span><div class="meta"><span class="car carA">1 號車</span>淡水上車</div></div></div>
+
+<div class="pc drv"><div class="ph"><span class="no">04</span><img src="web_photos/p_qianlima.jpg" alt="千里馬" loading="lazy"></div><div class="bd"><strong>千里馬</strong><span class="role">跨國境物理兵器。</span><div class="meta"><span class="car carB">2 號車</span>車長｜芝山</div></div></div>
+
+<div class="pc"><div class="ph"><span class="no">05</span><img src="web_photos/p_shunzi.jpg" alt="順子" loading="lazy"></div><div class="bd"><strong>順子</strong><span class="role">海鷗繞圈賽戰損版。</span><div class="meta"><span class="car carC">3 號車</span>海鷗賽會場上車</div></div></div>
+
+<div class="pc"><div class="ph"><span class="no">06</span><img src="web_photos/p_abin.jpg" alt="阿彬" loading="lazy"></div><div class="bd"><strong>阿彬</strong><span class="role">無情首腦。</span><div class="meta"><span class="car carC">3 號車</span>自行到林口上車</div></div></div>
+
+<div class="pc"><div class="ph"><span class="no">07</span><div class="empty">彬<small>照片待補</small></div></div><div class="bd"><strong>阿彬哥</strong><span class="role">首腦家屬。</span><div class="meta"><span class="car carC">3 號車</span>自行到林口上車</div></div></div>
+
+<div class="pc"><div class="ph"><span class="no">08</span><img src="web_photos/p_sarah.jpg" alt="莎拉" loading="lazy"></div><div class="bd"><strong>莎拉</strong><span class="role">台南安平 515 鐵人賽戰損版／226 超外掛。</span><div class="meta"><span class="car carC">3 號車</span>高鐵嘉義站上車</div></div></div>
+
+<div class="pc"><div class="ph"><span class="no">09</span><img src="web_photos/p_awang.jpg" alt="阿旺" loading="lazy"></div><div class="bd"><strong>阿旺</strong><span class="role">無情絞肉父。</span><div class="meta"><span class="car carB">2 號車</span>南港上車</div></div></div>
+
+<div class="pc"><div class="ph"><span class="no">10</span><img src="web_photos/p_xiaowang.jpg" alt="小旺" loading="lazy"></div><div class="bd"><strong>小旺</strong><span class="role">無情絞肉子。</span><div class="meta"><span class="car carB">2 號車</span>南港上車</div></div></div>
+
+<div class="pc"><div class="ph"><span class="no">11</span><div class="empty">腐<small>照片待補</small></div></div><div class="bd"><strong>豆腐</strong><span class="role">小旺他媽／絕望傳承見證人。</span><div class="meta"><span class="car carB">2 號車</span>南港上車</div></div></div>
+
+<div class="pc drv"><div class="ph"><span class="no">12</span><img src="web_photos/p_sam.jpg" alt="Sam" loading="lazy"></div><div class="bd"><strong>Sam</strong><span class="role">終極絞肉機／戰術運輸車長。</span><div class="meta"><span class="car carC">3 號車</span>車長｜林口</div></div></div>
+
+</div></section>
+</div><script>
+(function(){var r=document.documentElement,b=document.getElementById('tt');
+function set(t){r.setAttribute('data-theme',t);b.textContent=t==='light'?'切換深色':'切換白底';try{localStorage.setItem('theme',t)}catch(e){}}
+var t='light';try{t=localStorage.getItem('theme')||'light'}catch(e){}set(t);
+b.addEventListener('click',function(){set(r.getAttribute('data-theme')==='light'?'dark':'light')});})();
+</script></body></html>
