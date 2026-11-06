@@ -28,6 +28,7 @@ main{max-width:760px;margin:auto;padding:14px 14px 60px}
 .row input[type=time]{font-size:16px;padding:4px 8px;border:1px solid var(--line);border-radius:8px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(78px,1fr));gap:7px}
 .grid button{font:inherit;font-size:13px;padding:8px 2px;border:1px solid var(--line);background:var(--bg);border-radius:10px;line-height:1.25;color:var(--ink)}
+.grid button small{color:inherit;opacity:.7;font-size:11px}
 .grid button b{display:block;font-size:16px}
 .grid button.on{background:var(--ok);border-color:var(--ok);color:#fff}
 .prog{height:8px;background:var(--line);border-radius:9px;overflow:hidden;margin:6px 0 10px}
@@ -91,7 +92,7 @@ button.reset{font:inherit;font-size:13px;color:var(--sub);background:none;border
 <section class="card" id="hour">
 <h2>整點打卡｜33 小時 ＝ 33 個畫面</h2>
 <p class="hint">每小時固定拍 1 段 5 秒（我＋路＋手錶，口述「第幾小時」）。完成就點亮。</p>
-<div class="row">出發時間 <input type="time" id="t0" value="06:00"> <span class="sub">（改成你實際出發時間，格子會顯示預計時刻）</span></div>
+<div class="row">出發時間 <input type="time" id="t0" value="18:00"> <span class="sub">（11/6 出發；跨日的格子會標 +1天）</span></div>
 <div class="prog"><i id="pbar"></i></div>
 <div class="row"><span class="cnt" id="cnt">0 / 33</span><span class="sub">已完成</span></div>
 <div class="grid" id="hg"></div>
@@ -116,7 +117,7 @@ button.reset{font:inherit;font-size:13px;color:var(--sub);background:none;border
   var hg=document.getElementById('hg'),t0=document.getElementById('t0'),cnt=document.getElementById('cnt'),pb=document.getElementById('pbar');
   var done={};try{done=JSON.parse(get('hr')||'{}')}catch(e){}
   if(get('t0'))t0.value=get('t0');
-  function lab(h){var p=(t0.value||'06:00').split(':');var m=(parseInt(p[0])*60+parseInt(p[1])+h*60)%1440;return ('0'+Math.floor(m/60)).slice(-2)+':'+('0'+m%60).slice(-2)}
+  function lab(h){var p=(t0.value||'18:00').split(':');var tot=parseInt(p[0])*60+parseInt(p[1])+h*60,d=Math.floor(tot/1440),m=tot%1440;return ('0'+Math.floor(m/60)).slice(-2)+':'+('0'+m%60).slice(-2)+(d?' <small>+'+d+'天</small>':'')}
   function draw(){
     hg.innerHTML='';var n=0;
     for(var h=1;h<=33;h++){(function(h){
