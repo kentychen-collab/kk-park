@@ -69,6 +69,31 @@ ol.flow li:not(:last-child)::after{content:"↓";position:absolute;left:50%;bott
 .end b{color:var(--ink);display:block;font-size:18px;margin-bottom:4px}
 button.reset{font:inherit;font-size:13px;color:var(--sub);background:none;border:1px solid var(--line);border-radius:8px;padding:6px 12px;margin-top:6px}
 @media print{nav,.reset{display:none}details.sec>.bd{display:block}}
+
+.now{background:var(--ink);color:#fff;border-radius:18px;padding:16px 16px 14px;margin-bottom:14px;position:relative}
+.now .clock{font-size:34px;font-weight:700;letter-spacing:.02em;font-variant-numeric:tabular-nums;line-height:1.1}
+.now .date{color:#bbb;font-size:13px;margin-bottom:8px}
+.now .lbl{color:#ffb199;font-size:13px;letter-spacing:.06em}
+.now .cd{font-size:44px;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.1;margin:2px 0 6px}
+.now .grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}
+.now .grid2>div{background:#2e2e2e;border-radius:12px;padding:8px 10px}
+.now .grid2 .v{font-size:20px;font-weight:700;font-variant-numeric:tabular-nums}
+.now .phase{background:#fff;color:var(--ink);border-radius:14px;padding:12px 14px;margin-top:8px}
+.now .phase b.pn{font-size:19px}
+.now .phase .m{color:var(--acc);font-weight:700;margin-left:6px}
+.now .phase .f{font-size:16px;margin-top:4px}
+.now .phase .t{font-size:14px;color:var(--sub);margin-top:4px}
+.now.due{background:var(--acc);animation:pulse 1s infinite alternate}
+@keyframes pulse{from{opacity:1}to{opacity:.82}}
+.now .alert{background:#fff;color:var(--acc);font-weight:800;border-radius:12px;padding:10px 12px;margin-top:8px;text-align:center;font-size:18px}
+.now button{font:inherit;font-weight:700;border:0;border-radius:10px;padding:8px 14px;margin-top:8px;background:var(--acc);color:#fff}
+.now .night{background:#3a3a1e;color:#ffe9a0;border-radius:10px;padding:8px 12px;margin-top:8px;font-size:14px}
+.now .pole{font-size:13px;color:#ccc;margin-top:8px}
+.now select,.now input{font:inherit;font-size:14px;padding:4px 6px;border-radius:8px;border:1px solid #555;background:#2e2e2e;color:#fff}
+.now .set{display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-size:13px;color:#bbb;margin-top:10px}
+table.tl td{font-size:14px;padding:6px 6px}
+table.tl tr.cur{background:#fff0ea;font-weight:700}
+table.tl tr.past{color:#a3a099}
 </style></head><body>
 <header>
 <h1>11/06 四極點｜戶外影片拍攝說明書</h1>
@@ -76,6 +101,30 @@ button.reset{font:inherit;font-size:13px;color:var(--sub);background:none;border
 </header>
 <nav><a href="#hour">整點</a><a href="#s01">01</a><a href="#s02">02</a><a href="#s03">03</a><a href="#s04">04</a><a href="#s05">05</a><a href="#s06">06</a><a href="#s07">07</a><a href="#s08">08</a><a href="#s09">09</a><a href="#s10">10</a><a href="#s11">11</a><a href="#s12">12</a><a href="#s13">13</a><a href="#s14">14</a><a href="#s15">15</a><a href="#s16">16</a><a href="#s17">17</a></nav>
 <main>
+<section class="now" id="now">
+<div class="date" id="nDate"></div>
+<div class="clock" id="nClock">--:--:--</div>
+<div class="lbl" id="nLbl">—</div>
+<div class="cd" id="nCd">--:--:--</div>
+<div class="grid2">
+<div><div class="lbl" id="nL1">—</div><div class="v" id="nV1">—</div></div>
+<div><div class="lbl" id="nL2">—</div><div class="v" id="nV2">—</div></div>
+</div>
+<div class="alert" id="nAlert" style="display:none"></div>
+<button id="nBtn" style="display:none"></button>
+<div class="phase">
+<div><b class="pn" id="pName">—</b><span class="m" id="pMood"></span></div>
+<div class="f" id="pFocus"></div>
+<div class="t" id="pTip"></div>
+</div>
+<div class="night" id="nNight" style="display:none">🌙 夜間：低光、不邊騎邊拍。停下來補給、等紅燈、休息時再拍；整點打卡錯過就跳過。</div>
+<div class="pole">📍 遇到極點／重要地標：<b>地標 → 人 → 數據</b>＋一句話（「第 N 個完成」）</div>
+<div class="set">
+出發時間 <input type="datetime-local" id="ts">
+<button id="goNow" style="margin:0;padding:5px 10px;background:#555">我出發了（用現在）</button>
+階段 <select id="phSel"></select>
+</div>
+</section>
 <section class="hero">
 <h2>現場最簡版｜不知道拍什麼就看這裡</h2>
 <div class="big">核心原則：不要一直錄。拍關鍵鏡頭，每個鏡頭 3～7 秒。</div>
@@ -92,7 +141,7 @@ button.reset{font:inherit;font-size:13px;color:var(--sub);background:none;border
 <section class="card" id="hour">
 <h2>整點打卡｜33 小時 ＝ 33 個畫面</h2>
 <p class="hint">每小時固定拍 1 段 5 秒（我＋路＋手錶，口述「第幾小時」）。完成就點亮。</p>
-<div class="row">出發時間 <input type="time" id="t0" value="18:00"> <span class="sub">（11/6 出發；跨日的格子會標 +1天）</span></div>
+<div class="row sub">出發時間請在最上方面板設定；格子顯示預計時刻（跨日標 +1天）。</div>
 <div class="prog"><i id="pbar"></i></div>
 <div class="row"><span class="cnt" id="cnt">0 / 33</span><span class="sub">已完成</span></div>
 <div class="grid" id="hg"></div>
@@ -100,6 +149,10 @@ button.reset{font:inherit;font-size:13px;color:var(--sub);background:none;border
 <button class="reset" id="rst">清除整點紀錄</button>
 </section>
 
+<details class="sec" id="tlsec" open><summary>33 小時時間軸｜幾點拍什麼</summary><div class="bd">
+<p class="hint">每小時 1 段 5 秒（我＋路＋手錶，口述「第幾小時」）。階段是依 33 小時平均切的預設值，實際進度不同就用上方「階段」手動切換。</p>
+<table class="tl"><thead><tr><th>#</th><th>預計時刻</th><th>階段</th><th>重點</th></tr></thead><tbody id="tlb"></tbody></table>
+</div></details>
 <details id="s01" class="sec"><summary>01｜出發前</summary><div class="bd"><ul class="cl"><li><label><input type="checkbox"><span>裝備全景</span></label></li><li><label><input type="checkbox"><span>鞋子／車／背包</span></label></li><li><label><input type="checkbox"><span>水壺與補給</span></label></li><li><label><input type="checkbox"><span>手錶／運動數據</span></label></li><li><label><input type="checkbox"><span>出發前自己的臉</span></label></li><li><label><input type="checkbox"><span>集合地點／環境</span></label></li><li><label><input type="checkbox"><span>隊友集合</span></label></li><li><label><input type="checkbox"><span>出發前合照或團體畫面</span></label></li></ul><div class="tip"><b>特別要拍：「出發前的自己」5～10 秒</b><br>看鏡頭，不一定要講話。想講一句：「今天，四極點。」</div></div></details><details id="s02" class="sec"><summary>02｜正式出發</summary><div class="bd"><p>拍 4 個鏡頭</p><ul class="cl"><li><label><input type="checkbox"><span>隊伍開始出發</span></label></li><li><label><input type="checkbox"><span>自己離開的背影</span></label></li><li><label><input type="checkbox"><span>前方道路</span></label></li><li><label><input type="checkbox"><span>手錶開始計時／里程</span></label></li></ul><div class="tip"><b>最推薦：固定手機，讓自己／隊伍從鏡頭前經過。</b>拍 5 秒即可，非常適合當影片開場。</div></div></details><details id="s03" class="sec"><summary>03｜第一段・進入狀態</summary><div class="bd"><p>不要一直拍。選一個漂亮或有代表性的路段：</p><ul class="cl"><li><label><input type="checkbox"><span>前方道路</span></label></li><li><label><input type="checkbox"><span>自己運動中的畫面</span></label></li><li><label><input type="checkbox"><span>車輪／腳步</span></label></li><li><label><input type="checkbox"><span>周遭風景</span></label></li><li><label><input type="checkbox"><span>手錶數據</span></label></li></ul><div class="tip"><b>自拍一句話（可選）</b>：「現在還很有精神。」或「剛開始，狀態不錯。」<br>不用每個階段都講話。</div></div></details><details id="s04" class="sec"><summary>04｜第一個關鍵點</summary><div class="bd"><p>到達第一個重要地標／極點時，固定公式：<b>① 地標 → ② 人 → ③ 數據</b></p><ul class="cl"><li><label><input type="checkbox"><span>拍地標／路牌</span></label></li><li><label><input type="checkbox"><span>拍自己站在地標旁</span></label></li><li><label><input type="checkbox"><span>拍手錶／里程</span></label></li><li><label><input type="checkbox"><span>拍隊友</span></label></li><li><label><input type="checkbox"><span>拍下一段路</span></label></li></ul><div class="tip"><b>最好留一句話</b>：「第一個完成。」不用長篇訪談。</div></div></details><details id="s05" class="sec"><summary>05｜中段・開始累 ⚠️</summary><div class="bd"><p><b>這是影片非常重要的素材。</b>不要只拍漂亮風景，要留下「挑戰感」。</p><ul class="cl"><li><label><input type="checkbox"><span>喘氣</span></label></li><li><label><input type="checkbox"><span>流汗</span></label></li><li><label><input type="checkbox"><span>喝水</span></label></li><li><label><input type="checkbox"><span>吃補給</span></label></li><li><label><input type="checkbox"><span>坐下休息</span></label></li><li><label><input type="checkbox"><span>看著前方的路</span></label></li><li><label><input type="checkbox"><span>手錶數據</span></label></li><li><label><input type="checkbox"><span>疲累但繼續前進</span></label></li></ul><div class="tip"><b>自拍 3～5 秒</b>：不用整理頭髮，也不用刻意微笑，自然就好。<br>可以說：「開始有感覺了。」或「還有一段。」</div></div></details><details id="s06" class="sec"><summary>06｜第二／第三個關鍵點・3 Shot Rule</summary><div class="bd"><p>每到重要節點，都用同一套格式。</p><table><thead><tr><th>Shot</th><th>拍什麼</th><th>長度</th></tr></thead><tbody><tr><td><b>A 環境</b></td><td>我現在在哪裡？</td><td>3～5 秒</td></tr><tr><td><b>B 自己</b></td><td>我完成了什麼？</td><td>3～5 秒</td></tr><tr><td><b>C 細節</b></td><td>這一段花了多少時間／距離？（手錶、里程、路牌、補給、車、鞋子）</td><td>3 秒</td></tr></tbody></table></div></details><details id="s07" class="sec"><summary>07｜隊友素材</summary><div class="bd"><p>看到隊友，不要只拍合照。</p><ul class="cl"><li><label><input type="checkbox"><span>隊友從前方經過</span></label></li><li><label><input type="checkbox"><span>隊友從身旁經過</span></label></li><li><label><input type="checkbox"><span>一起前進</span></label></li><li><label><input type="checkbox"><span>隊友休息</span></label></li><li><label><input type="checkbox"><span>補給</span></label></li><li><label><input type="checkbox"><span>互相加油</span></label></li><li><label><input type="checkbox"><span>擊掌</span></label></li><li><label><input type="checkbox"><span>笑／聊天</span></label></li></ul><div class="tip"><b>最好的一種：讓隊友不知道你正在拍。</b>自然的畫面通常比大家看鏡頭更有生命力。</div></div></details><details id="s08" class="sec"><summary>08｜最後一段・進入完成模式</summary><div class="bd"><p>當你知道「快到了」，開始刻意增加素材。</p><ul class="cl"><li><label><input type="checkbox"><span>最後一段道路</span></label></li><li><label><input type="checkbox"><span>自己的腳／車輪</span></label></li><li><label><input type="checkbox"><span>手錶</span></label></li><li><label><input type="checkbox"><span>前方終點方向</span></label></li><li><label><input type="checkbox"><span>背影</span></label></li><li><label><input type="checkbox"><span>隊友</span></label></li><li><label><input type="checkbox"><span>最後的環境</span></label></li></ul><div class="tip"><b>最後 500m／最後一段</b>：如果安全允許，拍一個 5 秒連續鏡頭。不要一直切，讓觀眾感覺「真的快到了」。</div></div></details><details id="s09" class="sec" open><summary>09｜完成瞬間 ★★★★★</summary><div class="bd"><p><b>絕對不要漏拍。</b>抵達後先不要急著收手機。</p><ul class="cl"><li><label><input type="checkbox"><span>終點／地標</span></label></li><li><label><input type="checkbox"><span>自己抵達</span></label></li><li><label><input type="checkbox"><span>手錶／完成數據</span></label></li><li><label><input type="checkbox"><span>隊友</span></label></li><li><label><input type="checkbox"><span>擊掌／擁抱／歡呼</span></label></li><li><label><input type="checkbox"><span>自己喘氣的畫面</span></label></li></ul><div class="tip"><b>最重要的一鏡：「完成後的自己」</b><br>手機固定，拍 <b>8～10 秒</b>。什麼都可以不做：喘氣、看遠方、微笑、握拳、比 YA、看著鏡頭。這會是影片 Ending 的核心素材。</div></div></details><details id="s10" class="sec"><summary>10｜完成後的一句話</summary><div class="bd"><p>如果體力允許，自拍一句，<b>選一個就好</b>：</p><blockquote>「完成。」</blockquote><blockquote>「四極點，完成。」</blockquote><blockquote>「比想像中難。」</blockquote><blockquote>「累，但值得。」</blockquote><blockquote>「下一個挑戰。」</blockquote><p>不要講太長。</p></div></details><details id="s11" class="sec"><summary>11｜拍攝技術規則</summary><div class="bd"><table><thead><tr><th>項目</th><th>建議</th></tr></thead><tbody><tr><td>畫面比例</td><td><b>9:16 直式</b></td></tr><tr><td>解析度</td><td><b>4K</b></td></tr><tr><td>一般拍攝</td><td><b>30fps</b></td></tr><tr><td>需要慢動作</td><td><b>60fps</b></td></tr><tr><td>單一鏡頭</td><td>3～7 秒</td></tr><tr><td>重要畫面</td><td>5～10 秒</td></tr><tr><td>拍攝方式</td><td>盡量穩定</td></tr><tr><td>鏡頭</td><td>錄影前先擦乾淨</td></tr></tbody></table><div class="tip"><b>一個非常重要的習慣</b>：按下錄影後 <b>先等 1 秒 → 開始動作 → 動作完成後再等 1 秒 → 停止</b>。<br>不要「按錄影 → 馬上動 → 馬上停止」，這會讓後製很難剪。</div></div></details><details id="s12" class="sec"><summary>12｜不要一直拍的東西</summary><div class="bd"><ul class="no"><li>連續騎車 10 分鐘</li><li>一直拍自己的臉</li><li>每 5 分鐘拍一次手錶</li><li>每個風景都拍</li><li>每個人都拍很久</li><li>重複同樣角度</li></ul><blockquote><b>少量、有效、能交代故事。</b></blockquote></div></details><details id="s13" class="sec"><summary>13｜故事結構（剪輯時）</summary><div class="bd"><ol class="flow"><li>出發</li><li>第一個極點</li><li>進入狀態</li><li>第二個極點</li><li>開始疲累</li><li>第三個極點</li><li>最後挑戰</li><li>第四個極點</li><li>完成</li></ol></div></details><details id="s14" class="sec"><summary>14｜每個階段的情緒</summary><div class="bd"><table><thead><tr><th>階段</th><th>情緒</th><th>應拍素材</th></tr></thead><tbody><tr><td>出發</td><td>興奮</td><td>裝備、隊伍、出發</td></tr><tr><td>前段</td><td>輕鬆</td><td>道路、風景、笑容</td></tr><tr><td>中段</td><td>挑戰</td><td>汗、補給、數據</td></tr><tr><td>後段</td><td>疲累</td><td>喘氣、腳步、休息</td></tr><tr><td>最後</td><td>堅持</td><td>背影、道路、手錶</td></tr><tr><td>完成</td><td>成就</td><td>終點、歡呼、自己</td></tr></tbody></table></div></details><details id="s15" class="sec"><summary>15｜手機沒電／容量不足時</summary><div class="bd"><p><b>★★★★★ 絕對要拍</b></p><ol><li>出發</li><li>四個關鍵點</li><li>最累的時候</li><li>最後一段</li><li>完成</li><li>完成後的自己</li></ol><p><b>★★★ 可以拍</b>：風景、隊友、補給、裝備、細節</p></div></details><details id="s16" class="sec"><summary>16｜現場快速判斷</summary><div class="bd"><blockquote><b>「這個畫面可以讓沒參加的人知道我現在正在經歷什麼嗎？」</b></blockquote><div class="yn"><div class="y"><b>YES</b>拍 3～5 秒</div><div class="n"><b>NO</b>不拍，繼續前進</div></div></div></details><details id="s17" class="sec" open><summary>17｜四極點快速 Checklist</summary><div class="bd"><h4>出發</h4><ul class="cl"><li><label><input type="checkbox"><span>裝備</span></label></li><li><label><input type="checkbox"><span>自己</span></label></li><li><label><input type="checkbox"><span>隊友</span></label></li><li><label><input type="checkbox"><span>出發</span></label></li><li><label><input type="checkbox"><span>手錶</span></label></li></ul><h4>第一極點</h4><ul class="cl"><li><label><input type="checkbox"><span>地標</span></label></li><li><label><input type="checkbox"><span>自己</span></label></li><li><label><input type="checkbox"><span>數據</span></label></li></ul><h4>中段</h4><ul class="cl"><li><label><input type="checkbox"><span>道路</span></label></li><li><label><input type="checkbox"><span>風景</span></label></li><li><label><input type="checkbox"><span>運動中的自己</span></label></li><li><label><input type="checkbox"><span>補給</span></label></li><li><label><input type="checkbox"><span>疲累</span></label></li></ul><h4>第二／第三極點</h4><ul class="cl"><li><label><input type="checkbox"><span>地標</span></label></li><li><label><input type="checkbox"><span>自己</span></label></li><li><label><input type="checkbox"><span>數據</span></label></li><li><label><input type="checkbox"><span>隊友</span></label></li></ul><h4>最後階段</h4><ul class="cl"><li><label><input type="checkbox"><span>最後道路</span></label></li><li><label><input type="checkbox"><span>腳／車輪</span></label></li><li><label><input type="checkbox"><span>手錶</span></label></li><li><label><input type="checkbox"><span>背影</span></label></li><li><label><input type="checkbox"><span>終點方向</span></label></li></ul><h4>完成</h4><ul class="cl"><li><label><input type="checkbox"><span>終點</span></label></li><li><label><input type="checkbox"><span>自己</span></label></li><li><label><input type="checkbox"><span>手錶</span></label></li><li><label><input type="checkbox"><span>隊友</span></label></li><li><label><input type="checkbox"><span>歡呼</span></label></li><li><label><input type="checkbox"><span>完成後 10 秒自拍</span></label></li></ul></div></details>
 
 <div class="end"><b>最後記住一句話</b>不要把整趟活動全部錄下來。<br>把「值得被記住的瞬間」錄下來。<br>你的任務是留下足夠的素材，讓後製可以把這一天重新說成一個故事。</div>
@@ -109,28 +162,105 @@ button.reset{font:inherit;font-size:13px;color:var(--sub);background:none;border
   var K='reel048_';
   function get(k){try{return localStorage.getItem(K+k)}catch(e){return null}}
   function set(k,v){try{localStorage.setItem(K+k,v)}catch(e){}}
+  function $(i){return document.getElementById(i)}
+  function p2(n){return ('0'+n).slice(-2)}
+  function hms(sec){sec=Math.max(0,Math.floor(sec));return p2(Math.floor(sec/3600))+':'+p2(Math.floor(sec%3600/60))+':'+p2(sec%60)}
+  function dstr(d){return (d.getMonth()+1)+'/'+d.getDate()+' '+p2(d.getHours())+':'+p2(d.getMinutes())}
+  var TOTAL=33;
+  var PRE={n:'出發前',m:'準備',f:'裝備全景、鞋子／車／背包、水壺與補給、手錶、集合地點、隊友集合與合照',t:'特別要拍：「出發前的自己」5～10 秒，看鏡頭，可說「今天，四極點。」'};
+  var PH=[
+   {s:0,n:'出發',m:'興奮',f:'隊伍出發、自己離開的背影、前方道路、手錶開始計時',t:'最推薦：固定手機，讓自己／隊伍從鏡頭前經過 5 秒，當影片開場。'},
+   {s:1,n:'前段',m:'輕鬆',f:'道路、風景、笑容、運動中的自己',t:'選一個漂亮或有代表性的路段，不要一直拍。可自拍：「現在還很有精神。」'},
+   {s:10,n:'中段',m:'挑戰',f:'汗、補給、數據：喘氣、流汗、喝水、吃補給、看著前方的路',t:'⚠️ 這是影片很重要的素材。自拍 3～5 秒，不用整理頭髮：「開始有感覺了。」'},
+   {s:20,n:'後段',m:'疲累',f:'喘氣、腳步、休息、疲累但繼續前進',t:'自然就好，不用刻意微笑：「還有一段。」'},
+   {s:29,n:'最後',m:'堅持',f:'背影、最後一段道路、手錶、前方終點方向、隊友',t:'快到了就刻意增加素材。安全允許的話拍 5 秒連續鏡頭，不要一直切。'},
+   {s:32,n:'完成',m:'成就',f:'終點／地標、自己抵達、手錶完成數據、隊友、歡呼',t:'★ 抵達後先不要收手機：「完成後的自己」固定機位拍 8～10 秒。'}
+  ];
+  function autoPhase(h){var r=0;for(var i=0;i<PH.length;i++){if(h>=PH[i].s)r=i}return r}
   // checkboxes
   var cbs=[].slice.call(document.querySelectorAll('ul.cl input'));
   var saved={};try{saved=JSON.parse(get('cb')||'{}')}catch(e){}
   cbs.forEach(function(c,i){c.checked=!!saved[i];c.addEventListener('change',function(){saved[i]=c.checked;set('cb',JSON.stringify(saved))})});
-  // hourly
-  var hg=document.getElementById('hg'),t0=document.getElementById('t0'),cnt=document.getElementById('cnt'),pb=document.getElementById('pbar');
+  // start time
+  var ts=$('ts');
+  ts.value=get('ts')||'2026-11-06T18:00';
+  function start(){var d=new Date(ts.value);return isNaN(d)?new Date('2026-11-06T18:00'):d}
+  ts.addEventListener('change',function(){set('ts',ts.value);draw();tick()});
+  $('goNow').onclick=function(){var d=new Date();ts.value=d.getFullYear()+'-'+p2(d.getMonth()+1)+'-'+p2(d.getDate())+'T'+p2(d.getHours())+':'+p2(d.getMinutes());set('ts',ts.value);draw();tick()};
+  // phase select
+  var sel=$('phSel');
+  var o=document.createElement('option');o.value='auto';o.textContent='自動';sel.appendChild(o);
+  PH.forEach(function(x,i){var op=document.createElement('option');op.value=i;op.textContent=x.n;sel.appendChild(op)});
+  sel.value=get('ph')||'auto';
+  sel.addEventListener('change',function(){set('ph',sel.value);tick()});
+  // hourly grid + timeline
+  var hg=$('hg'),cnt=$('cnt'),pb=$('pbar'),tlb=$('tlb');
   var done={};try{done=JSON.parse(get('hr')||'{}')}catch(e){}
-  if(get('t0'))t0.value=get('t0');
-  function lab(h){var p=(t0.value||'18:00').split(':');var tot=parseInt(p[0])*60+parseInt(p[1])+h*60,d=Math.floor(tot/1440),m=tot%1440;return ('0'+Math.floor(m/60)).slice(-2)+':'+('0'+m%60).slice(-2)+(d?' <small>+'+d+'天</small>':'')}
+  function lab(h){var d=new Date(start().getTime()+h*3600000);var days=Math.floor((d-new Date(start().getFullYear(),start().getMonth(),start().getDate()))/86400000);return p2(d.getHours())+':'+p2(d.getMinutes())+(days?' <small>+'+days+'天</small>':'')}
   function draw(){
     hg.innerHTML='';var n=0;
-    for(var h=1;h<=33;h++){(function(h){
+    for(var h=1;h<=TOTAL;h++){(function(h){
       var b=document.createElement('button');
       b.innerHTML='<b>H'+h+'</b>'+lab(h);
       if(done[h]){b.className='on';n++}
-      b.onclick=function(){done[h]=!done[h];set('hr',JSON.stringify(done));draw()};
+      b.onclick=function(){done[h]=!done[h];set('hr',JSON.stringify(done));draw();tick()};
       hg.appendChild(b)})(h)}
-    cnt.textContent=n+' / 33';pb.style.width=(n/33*100)+'%';
+    cnt.textContent=n+' / '+TOTAL;pb.style.width=(n/TOTAL*100)+'%';
+    var rows='';
+    for(var h2=0;h2<=TOTAL;h2++){
+      var ph=PH[autoPhase(h2)];
+      var d=new Date(start().getTime()+h2*3600000);
+      rows+='<tr data-h="'+h2+'"><td>'+(h2===0?'出發':'H'+h2)+(done[h2]?' ✓':'')+'</td><td>'+dstr(d)+'</td><td>'+(h2===TOTAL?'預計完成':ph.n)+'</td><td>'+(h2===0?'出發前自己、隊伍出發':h2===TOTAL?'終點、完成後的自己 8～10 秒':ph.f.split('、').slice(0,3).join('、'))+'</td></tr>';
+    }
+    tlb.innerHTML=rows;
   }
-  t0.addEventListener('change',function(){set('t0',t0.value);draw()});
-  document.getElementById('rst').onclick=function(){if(confirm('清除整點紀錄？')){done={};set('hr','{}');draw()}};
-  draw();
+  $('rst').onclick=function(){if(confirm('清除整點紀錄？')){done={};set('hr','{}');draw();tick()}};
+  // tick
+  var lastAlert=-1;
+  function tick(){
+    var now=new Date(),st=start();
+    var el=(now-st)/3600000; // hours
+    $('nDate').textContent=(now.getMonth()+1)+'/'+now.getDate()+' 週'+'日一二三四五六'.charAt(now.getDay());
+    $('nClock').textContent=p2(now.getHours())+':'+p2(now.getMinutes())+':'+p2(now.getSeconds());
+    var hr=now.getHours();$('nNight').style.display=(hr>=22||hr<5)?'block':'none';
+    var box=$('now'),al=$('nAlert'),btn=$('nBtn');
+    var ph;
+    box.className='now';al.style.display='none';btn.style.display='none';
+    if(el<0){
+      $('nLbl').textContent='距離出發（'+dstr(st)+'）';
+      $('nCd').textContent=hms(-el*3600);
+      $('nL1').textContent='預計完成';$('nV1').textContent=dstr(new Date(st.getTime()+TOTAL*3600000));
+      $('nL2').textContent='整點打卡';$('nV2').textContent='0 / '+TOTAL;
+      ph=PRE;
+      if(-el<=0.25){ph={n:'即將出發',m:'倒數',f:'隊伍集合、手錶準備計時、固定機位架好，拍隊伍出發的 5 秒',t:'按下錄影後：先等 1 秒 → 動作 → 再等 1 秒 → 停止。'}}
+    }else{
+      var rem=TOTAL-el;
+      var due=Math.floor(el);
+      var pending=(due>=1&&due<=TOTAL&&!done[due]&&(el-due)<0.5)?due:0;
+      if(rem>0){
+        $('nLbl').textContent='已經過';$('nCd').textContent=hms(el*3600);
+        var nextH=Math.min(TOTAL,due+1);
+        $('nL1').textContent='下一個整點 H'+nextH;$('nV1').textContent=hms((nextH-el)*3600);
+        $('nL2').textContent='距離 33 小時';$('nV2').textContent=hms(rem*3600);
+      }else{
+        $('nLbl').textContent='已超過 33 小時';$('nCd').textContent='+'+hms(-rem*3600);
+        $('nL1').textContent='整點打卡';$('nV1').textContent=Object.keys(done).filter(function(k){return done[k]}).length+' / '+TOTAL;
+        $('nL2').textContent='狀態';$('nV2').textContent='完成模式';
+      }
+      if(pending){
+        box.className='now due';al.style.display='block';al.textContent='⏰ H'+pending+' 整點打卡時間到！拍 5 秒：我＋路＋手錶，口述「第 '+pending+' 小時」';
+        btn.style.display='inline-block';btn.textContent='✓ 完成 H'+pending+' 打卡';btn.onclick=function(){done[pending]=true;set('hr',JSON.stringify(done));draw();tick()};
+        if(lastAlert!==pending){lastAlert=pending;try{navigator.vibrate&&navigator.vibrate([300,150,300])}catch(e){}}
+      }
+      ph=PH[autoPhase(Math.max(0,el))];
+    }
+    if(sel.value!=='auto'&&el>=0)ph=PH[parseInt(sel.value,10)];
+    $('pName').textContent=ph.n;$('pMood').textContent=ph.m;$('pFocus').textContent='現在拍：'+ph.f;$('pTip').textContent=ph.t;
+    // highlight timeline
+    var trs=tlb.children;
+    for(var i=0;i<trs.length;i++){var h=parseInt(trs[i].getAttribute('data-h'),10);trs[i].className=(el>=h&&el<h+1)?'cur':(el>=h+1?'past':'')}
+  }
+  draw();tick();setInterval(tick,1000);
 })();
 </script>
 </body></html>
